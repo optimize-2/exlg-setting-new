@@ -280,7 +280,7 @@
                     const mod = modules[mt].children[i];
                     if (mod.Hide || mod.Hide == null) {
                         const isE = mod.enable ? "checked" : "";
-                        const isC = mod.rawName[0] === '@' ? "disabled" : "";
+                        const isC = (mod.rawName[0] === '@' || mod.unclosable) ? "disabled" : "";
                         const isEx = mod.settings.length > 0 ? extensible : "";
                         $('.l2').append('<label id="M-' + modules[mt].name + "-" + mod.name + '" class="lss mdui-list-item mdui-ripple" Mname="' + mod.name + '" Mtype="' + modules[mt].name + '"><div class="mdui-list-item-content">' + mod.name.replace(/_/g," ") + '</div>' + isEx + '<div class="mdui-checkbox"><input type="checkbox" ' + isE + " " + isC + '/><i class="mdui-checkbox-icon"></i></div></label>');
                         add('setTimeout(function(){$(\'#M-\'+modules[' + mt + '].name+"-"+modules[' + mt + '].children[' + i + '].name).css("opacity","1");$(\'#M-\'+modules[' + mt + '].name+"-"+modules[' + mt + '].children[' + i + '].name).css("margin-right","0");},' + ((i + 1) * 100) + ');$(\'#M-\'+modules[' + mt + '].name+"-"+modules[' + mt + '].children[' + i + '].name).mouseenter(function(){mouseEventHandle(' + mt + ',' + i + ',true);}).mouseleave(function(){mouseEventHandle(' + mt + ',' + i + ',false);}).mousedown(function(e){if(3 == e.which){clickModule(' + mt + ',' + i + ');}else if(1 == e.which){rc(' + mt + ',' + i + ');}});');

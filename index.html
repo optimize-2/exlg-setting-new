@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href="./lib/mdui/mdui.min.css" />
+    <link rel="icon" href="https://exlg.cc/img/logo.png" />
     <script src="./lib/mdui/mdui.min.js"></script>
     <script src="./lib/jquery/jquery.min.js"></script>
 </head>
@@ -186,6 +187,8 @@
                             [set.displayName, set.description[1]] = [set.description[1], set.displayName];
                         }
                         set.Val = sto[mod.rawName][set.name];
+                        if (set.type === "SELECTBOX" && window.exlg.mod.data[mod.rawName].lvs[set.name]?.get === "id")
+                            set.Val = set.acceptableValues[set.Val]
                     })
                 })
             })
@@ -251,11 +254,9 @@
         }
         function mssIChange(a, mt, i, is) {
             mod = modules[mt].children[i];
-            var value;
+            var value = a.value;
             if (mod.settings[is].increment == 1) {
-                value = new Integer(a.value)
-            } else {
-                value = new Float(a.value)
+                value = ~~value
             }
             sto[mod.rawName][mod.settings[is].name] = value;
             mod.settings[is].Val = a.value;

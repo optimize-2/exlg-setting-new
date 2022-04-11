@@ -187,7 +187,7 @@
                             [set.displayName, set.description[1]] = [set.description[1], set.displayName];
                         }
                         set.Val = sto[mod.rawName][set.name];
-                        if (set.type === "SELECTBOX" && window.exlg.mod.data[mod.rawName].lvs[set.name]?.get === "id")
+                        if (set.type === "SELECTBOX" && (window.exlg.datas ?? window.exlg.mod.data)[mod.rawName].lvs[set.name]?.get === "id")
                             set.Val = set.acceptableValues[set.Val]
                     })
                 })
@@ -232,7 +232,7 @@
         }
         function rc(mt, i) {
             mod = modules[mt].children[i];
-            if (mod.rawName[0] === "@") return;
+            if (mod.rawName[0] === '@' || mod.unclosable) return;
             sto[mod.rawName].on = mod.enable = !mod.enable;
             if (mod.enable) {
                 $('#M-' + modules[mt].name + "-" + mod.Name + ' div input').removeAttr("checked");
